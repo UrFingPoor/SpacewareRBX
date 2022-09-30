@@ -72,6 +72,7 @@ namespace SpacewareRBX
             this.codeBox.CharWidth = 8;
             this.codeBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.codeBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.codeBox.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.codeBox.ForeColor = System.Drawing.Color.Gray;
             this.codeBox.IsReplaceMode = false;
             this.codeBox.Location = new System.Drawing.Point(85, 40);
@@ -84,7 +85,6 @@ namespace SpacewareRBX
             this.codeBox.Size = new System.Drawing.Size(573, 267);
             this.codeBox.TabIndex = 0;
             this.codeBox.Zoom = 100;
-            this.codeBox.Load += new System.EventHandler(this.codeBox_Load);
             // 
             // label1
             // 

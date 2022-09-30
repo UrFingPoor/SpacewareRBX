@@ -36,7 +36,6 @@ namespace SpacewareRBX
             Task.WaitAll();
             Process.Start(AppDomain.CurrentDomain.BaseDirectory + "finj.exe");
             MessageBox.Show($"[Info] Injection Process, Started!", "Alert",MessageBoxButtons.OK, MessageBoxIcon.Information);
-
         }
         public static void CleanUp()
         {
@@ -46,7 +45,6 @@ namespace SpacewareRBX
                 "kernel64.sys.dll",
                 "finj.exe"
             };
-
             for (int i = 0; i < FileNames.Length; i++)
             {
                 if (i == FileNames.Length) break;

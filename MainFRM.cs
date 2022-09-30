@@ -5,14 +5,11 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
-
 namespace SpacewareRBX
 {
     public partial class MainFRM : Form
     {
         public SpaceWareAPI api = new SpaceWareAPI();
-      
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -23,14 +20,12 @@ namespace SpacewareRBX
             int nWidthEllipse, // width of ellipse
             int nHeightEllipse // height of ellipse
         );
-
         public MainFRM()
         {
             InitializeComponent();
             DownloadHandler.InitializeDownloadHandler();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 18, 18));
         }
-
         #region "Mouse/Form Events"
         private bool _dragging = false;
         private Point _start_point = new Point(0, 0);
@@ -39,12 +34,10 @@ namespace SpacewareRBX
             _dragging = true;  // _dragging is your variable flag
             _start_point = new Point(e.X, e.Y);
         }
-
         private void Object_MouseUp(object sender, MouseEventArgs e)
         {
             _dragging = false;
         }
-
         private void Object_MouseMove(object sender, MouseEventArgs e)
         {
             if (_dragging)
@@ -65,34 +58,33 @@ namespace SpacewareRBX
         {
             Process.Start("https://solo.to/lamer");
         }
-       
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (Config.Patched.Contains("False"))
-                statusLbl.Text = $"Status: Undetected!";
-            else
-                statusLbl.Text = $"Status: Patched!";
-        }
-      
-        private void codeBox_Load(object sender, EventArgs e)
-        {
-          
-            codeBox.Language = Language.Lua;
+            try
+            {
+                if (Config.Patched.Contains("False"))
+                    statusLbl.Text = $"Status: Undetected!";
+                else
+                    statusLbl.Text = $"Status: Patched!";
+                codeBox.Language = Language.Lua;
+            }
+            catch (Exception Error)
+            {
+                MessageBox.Show(Error.StackTrace, "Oh Shit!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
-
         private void inject_Click(object sender, EventArgs e)
         {
             try
             {
-                if(!api.IsAPIAttached)
+                if (!api.IsAPIAttached)
                     DownloadHandler.CleanUp();
-                    DownloadHandler.Download_Injector();
-                    attchedLbl.Text = "Injected: YES!";
+                DownloadHandler.Download_Injector();
+                attchedLbl.Text = "Injected: YES!";
             }
             catch { }
         }
-
         private void SendluaBTN_Click(object sender, EventArgs e)
         {
             api.SendLuaScript(codeBox.Text);
@@ -104,21 +96,15 @@ namespace SpacewareRBX
         private void OpenFIleBTN_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
-            {
                 if (ofd.ShowDialog() == DialogResult.OK)
                     api.SendLuaScript(System.IO.File.ReadAllText(ofd.FileName));
-            }
         }
-
         private void SaveFileBTN_Click(object sender, EventArgs e)
         {
             using (var sfd = new SaveFileDialog())
-            {
                 if (sfd.ShowDialog() == DialogResult.OK)
                     File.WriteAllText(sfd.FileName, codeBox.Text);
-            }
         }
-
         private void DiscordBTN_Click(object sender, EventArgs e)
         {
             Process.Start("https://discord.gg/3bpkkJ7Gq4");
