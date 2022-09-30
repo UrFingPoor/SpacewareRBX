@@ -1,4 +1,4 @@
-﻿
+
 namespace SpacewareRBX
 {
     partial class MainFRM
@@ -111,7 +111,7 @@ namespace SpacewareRBX
             this.InjectBTN.TabIndex = 2;
             this.InjectBTN.Text = "Inject";
             this.InjectBTN.UseVisualStyleBackColor = true;
-            this.InjectBTN.Click += new System.EventHandler(this.inject_Click);
+            this.InjectBTN.Click += new System.EventHandler(this.Inject_Click);
             // 
             // SendLuaCBTN
             // 
@@ -332,4 +332,3 @@ namespace SpacewareRBX
         private System.Windows.Forms.Button SaveFileBTN;
     }
 }
-
