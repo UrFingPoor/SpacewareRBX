@@ -14,8 +14,8 @@ namespace SpacewareRBX
         {
             try
             {
-                var task = Task.Run(() => MakeRequest(new Uri($"{Config.Host}software/exploitapi/latestdata.json"))); task.Wait();
-                dynamic apiresp = JObject.Parse(task.Result);
+                var request = Task.Run(() => MakeRequest(new Uri($"{Config.Host}software/exploitapi/latestdata.json"))); request.Wait();
+                dynamic apiresp = JObject.Parse(request.Result);
                 Config.Injector = apiresp["qdRFzx_exe"]; //injector download
                 Config.DependencyDLL = apiresp["injDep"]; // injector dependency
                 Config.ExecutorDLL = apiresp["exploit-module"].download; //Lua interpreter\Executor
@@ -68,7 +68,6 @@ namespace SpacewareRBX
             }
             return response;
         }
-
         private static async Task DownloadFile(string Url, string pathToSave)
         {
             using (var client = new HttpClient())

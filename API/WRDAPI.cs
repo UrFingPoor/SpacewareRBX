@@ -53,17 +53,23 @@ namespace SpacewareRBX
         public void SetFogEnd(int value = 0) => SendLuaScript("game:GetService(\"Lighting\").FogEnd = " + value.ToString());
         public void SetJumpPower(int value = 100) => SendLuaScript("game:GetService(\"Players\").LocalPlayer.Character.Humanoid.JumpPower = " + value.ToString());
         public void TeleportToPlayer(string targetUsername = "me") => SendLuaScript("game:GetService(\"Players\").LocalPlayer.Character:MoveTo(game:GetService(\"Players\"):FindFirstChild(" + targetUsername + ").Character.HumanoidRootPart.Position)");
+        public void LuaC_pcall(int numberOfArguments, int numberOfResults, int ErrorFunction) => SendLuaCScript($"pushnumber {numberOfArguments} {numberOfResults} {ErrorFunction}");
+        public void RemoveLimbs(string username = "me")
+        {
+            SendLuaScript("loadstring(game:HttpGet(\"https://cdn.wearedevs.net/scripts/Remove Arms.txt\"))()");
+            SendLuaScript("loadstring(game:HttpGet(\"https://cdn.wearedevs.net/scripts/Remove Legs.txt\"))()");
+        }
         public void SendLuaCScript(string Script)
         {
             foreach (string input in Script.Split("\r\n".ToCharArray()))
             {
                 try
                 {
-                    this.SMTP(this.luacpipe, input);
+                    SMTP(luacpipe, input);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message.ToString());
+                    MessageBox.Show(ex.StackTrace);
                 }
             }
         }
@@ -75,14 +81,12 @@ namespace SpacewareRBX
                 int timeout = 0;
                 if (!WaitNamedPipe(Path.GetFullPath(string.Format("\\\\.\\pipe\\{0}", pipeName)), timeout))
                 {
-                    int lastWin32Error = Marshal.GetLastWin32Error();
-                    if (lastWin32Error == 0)
+                    switch (Marshal.GetLastWin32Error())
                     {
-                        return false;
-                    }
-                    if (lastWin32Error == 2)
-                    {
-                        return false;
+                        case 0:
+                            return false;
+                        case 2:
+                            return false;
                     }
                 }
                 result = true;
@@ -105,9 +109,7 @@ namespace SpacewareRBX
                         using (StreamWriter streamWriter = new StreamWriter(namedPipeClientStream))
                         {
                             streamWriter.Write(input);
-                            streamWriter.Dispose();
                         }
-                        namedPipeClientStream.Dispose();
                     }
                     return;
                 }
@@ -123,23 +125,6 @@ namespace SpacewareRBX
                 }
             }
             MessageBox.Show("Error occured. Did the dll properly inject?", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-        public void LuaC_pcall(int numberOfArguments, int numberOfResults, int ErrorFunction)
-        {
-            this.SendLuaCScript(string.Concat(new string[]
-            {
-                "pushnumber ",
-                numberOfArguments.ToString(),
-                " ",
-                numberOfResults.ToString(),
-                " ",
-                ErrorFunction.ToString()
-            }));
-        }
-        public void RemoveLimbs(string username = "me")
-        {
-            SendLuaScript("loadstring(game:HttpGet(\"https://cdn.wearedevs.net/scripts/Remove Arms.txt\"))()");
-            SendLuaScript("loadstring(game:HttpGet(\"https://cdn.wearedevs.net/scripts/Remove Legs.txt\"))()");
-        }
+        }   
     }
 }
