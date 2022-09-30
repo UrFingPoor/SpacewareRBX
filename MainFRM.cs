@@ -80,8 +80,8 @@ namespace SpacewareRBX
             {
                 if (!api.IsAPIAttached)
                     DownloadHandler.CleanUp();
-                DownloadHandler.Download_Injector();
-                attchedLbl.Text = "Injected: YES!";
+                    DownloadHandler.Download_Injector();
+                    attchedLbl.Text = "Injected: YES!";
             }
             catch { }
         }
