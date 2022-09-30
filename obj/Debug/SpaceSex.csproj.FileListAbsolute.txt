@@ -1,0 +1,15 @@
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\bin\Debug\SpaceSex.exe.config
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\bin\Debug\SpaceSex.exe
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\bin\Debug\SpaceSex.pdb
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\bin\Debug\FastColoredTextBox.dll
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\bin\Debug\FastColoredTextBox.xml
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\obj\Debug\SpaceSex.csproj.AssemblyReference.cache
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\obj\Debug\SpaceSex.Properties.Resources.resources
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\obj\Debug\SpaceSex.csproj.GenerateResource.cache
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\obj\Debug\SpaceSex.csproj.CoreCompileInputs.cache
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\obj\Debug\SpaceSex.csproj.CopyComplete
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\obj\Debug\SpaceSex.exe
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\obj\Debug\SpaceSex.pdb
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Josh\source\repos\SpaceSex\SpaceSex\obj\Debug\SpaceSex.MainFRM.resources
