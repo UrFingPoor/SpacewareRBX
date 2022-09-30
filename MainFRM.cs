@@ -10,7 +10,6 @@ namespace SpacewareRBX
 {
     public partial class MainFRM : Form
     {
-
         #region "API Ref/CreateRoundRectRgn Pos"
         public SpaceWareAPI api = new SpaceWareAPI();
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
