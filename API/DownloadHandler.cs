@@ -55,17 +55,11 @@ namespace SpacewareRBX
 
             for (int i = 0; i < FileNames.Length; i++)
             {
-                if (i == FileNames.Length)
-                    break;
+                if (i == FileNames.Length) break;
                 if (File.Exists($"{AppDomain.CurrentDomain.BaseDirectory + FileNames[i]}"))
                 {
                     File.Delete($"{AppDomain.CurrentDomain.BaseDirectory + FileNames[i]}");
-                    MessageBox.Show(
-                        $"[Info] Removed {AppDomain.CurrentDomain.BaseDirectory + FileNames[i]}, Done!",
-                        "Alert",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
+                    MessageBox.Show($"[Info] Removed {AppDomain.CurrentDomain.BaseDirectory + FileNames[i]}, Done!","Alert",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
             }
         }
