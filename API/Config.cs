@@ -8,6 +8,5 @@
         public static string Injector { get; set; }
         public static string DependencyDLL { get; set; }
         public static string ExecutorDLL { get; set; }
-
     }
 }

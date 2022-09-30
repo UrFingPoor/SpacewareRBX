@@ -34,14 +34,8 @@ namespace SpacewareRBX
             await DownloadFile(Config.DependencyDLL, $"{AppDomain.CurrentDomain.BaseDirectory}\\kernel64.sys.dll");
             await DownloadFile(Config.ExecutorDLL, $"{AppDomain.CurrentDomain.BaseDirectory}\\exploit-main.dll");
             Task.WaitAll();
-
             Process.Start(AppDomain.CurrentDomain.BaseDirectory + "finj.exe");
-            MessageBox.Show(
-                $"[Info] Injection Process, Started!",
-                "Alert",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            MessageBox.Show($"[Info] Injection Process, Started!", "Alert",MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
         public static void CleanUp()
@@ -63,7 +57,6 @@ namespace SpacewareRBX
                 }
             }
         }
-        //Makes a get request to api to obtain response.
         private static async Task<string> MakeRequest(Uri u)
         {
             var response = string.Empty;

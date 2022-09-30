@@ -124,7 +124,6 @@ namespace SpacewareRBX
             }
             MessageBox.Show("Error occured. Did the dll properly inject?", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
-
         public void LuaC_pcall(int numberOfArguments, int numberOfResults, int ErrorFunction)
         {
             this.SendLuaCScript(string.Concat(new string[]
