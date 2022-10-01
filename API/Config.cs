@@ -1,4 +1,4 @@
-﻿namespace SpacewareRBX
+namespace SpacewareRBX
 {
     public static class Config
     {
@@ -8,5 +8,6 @@
         public static string Injector { get; set; }
         public static string DependencyDLL { get; set; }
         public static string ExecutorDLL { get; set; }
+        public static string BasePath { get; set; }
     }
 }
