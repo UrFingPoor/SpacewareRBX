@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
@@ -21,6 +21,7 @@ namespace SpacewareRBX
                 Config.ExecutorDLL = apiresp["exploit-module"].download; //Lua interpreter\Executor
                 Config.Version = apiresp["exploit-module"].version; //epxloit version
                 Config.Patched = apiresp["exploit-module"].patched; //patched check
+                Config.BasePath = Environment.CurrentDirectory;
             }
             catch (NullReferenceException Error)
             {
@@ -30,9 +31,9 @@ namespace SpacewareRBX
         }
         public static async void Download_Injector()
         {
-            await DownloadFile(Config.Injector, $"{AppDomain.CurrentDomain.BaseDirectory}\\finj.exe");
-            await DownloadFile(Config.DependencyDLL, $"{AppDomain.CurrentDomain.BaseDirectory}\\kernel64.sys.dll");
-            await DownloadFile(Config.ExecutorDLL, $"{AppDomain.CurrentDomain.BaseDirectory}\\exploit-main.dll");
+            await DownloadFile(Config.Injector, $"{Config.BasePath}\\finj.exe");
+            await DownloadFile(Config.DependencyDLL, $"{Config.BasePath}\\kernel64.sys.dll");
+            await DownloadFile(Config.ExecutorDLL, $"{Config.BasePath}\\exploit-main.dll");
             Task.WaitAll();
             Process.Start(AppDomain.CurrentDomain.BaseDirectory + "finj.exe");
             MessageBox.Show($"[Info] Injection Process, Started!", "Alert",MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -48,10 +49,10 @@ namespace SpacewareRBX
             for (int i = 0; i < FileNames.Length; i++)
             {
                 if (i == FileNames.Length) break;
-                if (File.Exists($"{AppDomain.CurrentDomain.BaseDirectory + FileNames[i]}"))
+                if (File.Exists($"{Config.BasePath + FileNames[i]}"))
                 {
-                    File.Delete($"{AppDomain.CurrentDomain.BaseDirectory + FileNames[i]}");
-                    MessageBox.Show($"[Info] Removed {AppDomain.CurrentDomain.BaseDirectory + FileNames[i]}, Done!","Alert",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    File.Delete($"{Config.BasePath + FileNames[i]}");
+                    MessageBox.Show($"[Info] Removed {Config.BasePath + FileNames[i]}, Done!","Alert",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
             }
         }
