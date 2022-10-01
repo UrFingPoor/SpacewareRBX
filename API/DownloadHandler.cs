@@ -26,34 +26,42 @@ namespace SpacewareRBX
             catch (NullReferenceException Error)
             {
                 MessageBox.Show(Error.StackTrace, "Oh Shit!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
+            } 
         }
         public static async void Download_Injector()
         {
-            await DownloadFile(Config.Injector, $"{Config.BasePath}\\finj.exe");
-            await DownloadFile(Config.DependencyDLL, $"{Config.BasePath}\\kernel64.sys.dll");
-            await DownloadFile(Config.ExecutorDLL, $"{Config.BasePath}\\exploit-main.dll");
-            Task.WaitAll();
-            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "finj.exe");
-            MessageBox.Show($"[Info] Injection Process, Started!", "Alert",MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                await DownloadFile(Config.Injector, $"{Config.BasePath}\\finj.exe");
+                await DownloadFile(Config.DependencyDLL, $"{Config.BasePath}\\kernel64.sys.dll");
+                await DownloadFile(Config.ExecutorDLL, $"{Config.BasePath}\\exploit-main.dll");
+                Task.WaitAll();
+                Process.Start(AppDomain.CurrentDomain.BaseDirectory + "finj.exe");
+                MessageBox.Show($"[Info] Injection Process, Started!", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (NullReferenceException Error)
+            {
+                MessageBox.Show(Error.StackTrace, "Oh Shit!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public static void CleanUp()
         {
-            string[] FileNames =
+            try
             {
-                "exploit-main.dll",
-                "kernel64.sys.dll",
-                "finj.exe"
-            };
-            for (int i = 0; i < FileNames.Length; i++)
-            {
-                if (i == FileNames.Length) break;
-                if (File.Exists($"{Config.BasePath + FileNames[i]}"))
+                string[] FileNames = { "exploit-main.dll", "kernel64.sys.dll", "finj.exe" };
+                for (int i = 0; i < FileNames.Length; i++)
                 {
-                    File.Delete($"{Config.BasePath + FileNames[i]}");
-                    MessageBox.Show($"[Info] Removed {Config.BasePath + FileNames[i]}, Done!","Alert",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    if (i == FileNames.Length) break;
+                    if (File.Exists($"{Config.BasePath + FileNames[i]}"))
+                    {
+                        File.Delete($"{Config.BasePath + FileNames[i]}");
+                        MessageBox.Show($"[Info] Removed {Config.BasePath + FileNames[i]}, Done!", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
+            }
+            catch(IOException Error)
+            {
+                MessageBox.Show(Error.StackTrace, "Oh Shit!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private static async Task<string> MakeRequest(Uri u)
