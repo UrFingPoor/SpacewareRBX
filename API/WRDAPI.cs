@@ -11,10 +11,10 @@ namespace SpacewareRBX
         //skidded WRDAPI DLL FUCK Using the WeAreDevs.dll all it does is download the flux injector then inject
         //exploit-main.dll that allows you to have coms from you to the game which allows you to send and execute lua. all cmds in the wWRD Dll are below. 
         //Cleaned the fuck out ur class which was more lines then a coke head could snort in a lifetime forfcksake
-        private string luapipe = "WeAreDevsPublicAPI_Lua";
-        private string luacpipe = "WeAreDevsPublicAPI_LuaC";
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
+        private string luapipe = "WeAreDevsPublicAPI_Lua";
+        private string luacpipe = "WeAreDevsPublicAPI_LuaC";
         private static extern bool WaitNamedPipe(string name, int timeout);
         public bool IsAPIAttached => NamedPipeExist(luapipe);
         public void SendLuaScript(string Script) => SMTP(luapipe, Script);
