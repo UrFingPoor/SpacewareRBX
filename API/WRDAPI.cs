@@ -29,7 +29,7 @@ namespace SpacewareRBX
         public void LuaC_gettop() => SendLuaCScript("gettop");
         public void LuaC_pushnil() => SendLuaCScript("pushnil");
         public void LuaC_next(int index) => SendLuaCScript("next");
-        public void LuaC_pop(int quantity) => SendLuaCScript($"pop {quantity}";
+        public void LuaC_pop(int quantity) => SendLuaCScript($"pop {quantity}");
         public void ConsolePrint(string text = "") => SendLuaScript($"rconsoleprint {text}");
         public void ConsoleWarn(string text = "") => SendLuaScript($"rconsolewarn {text}");
         public void ConsoleError(string text = "") => SendLuaScript($"rconsoleerr {text}");
