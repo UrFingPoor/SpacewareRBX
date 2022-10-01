@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.IO.Pipes;
 using System.Runtime.InteropServices;
@@ -11,28 +11,28 @@ namespace SpacewareRBX
         //skidded WRDAPI DLL FUCK Using the WeAreDevs.dll all it does is download the flux injector then inject
         //exploit-main.dll that allows you to have coms from you to the game which allows you to send and execute lua. all cmds in the wWRD Dll are below. 
         //Cleaned the fuck out ur class which was more lines then a coke head could snort in a lifetime forfcksake
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
         private string luapipe = "WeAreDevsPublicAPI_Lua";
         private string luacpipe = "WeAreDevsPublicAPI_LuaC";
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool WaitNamedPipe(string name, int timeout);
         public bool IsAPIAttached => NamedPipeExist(luapipe);
         public void SendLuaScript(string Script) => SMTP(luapipe, Script);
-        public void LuaC_getglobal(string service) => SendLuaCScript("getglobal " + service);
-        public void LuaC_getfield(int index, string instance) => SendLuaCScript("getglobal " + index.ToString() + " " + instance);
-        public void LuaC_setfield(int index, string property) => SendLuaCScript("setfield " + index.ToString() + " " + property);
-        public void LuaC_pushvalue(int index) => SendLuaCScript("pushvalue " + index.ToString());
-        public void LuaC_pushstring(string text) => SendLuaCScript("pushstring " + text);
-        public void LuaC_pushnumber(int number) => SendLuaCScript("pushnumber " + number.ToString());
-        public void LuaC_settop(int index) => SendLuaCScript("settop " + index.ToString());
-        public void LuaC_pushboolean(string value = "false") => SendLuaCScript("pushboolean " + value);
+        public void LuaC_getglobal(string service) => SendLuaCScript($"getglobal {service}");
+        public void LuaC_getfield(int index, string instance) => SendLuaCScript($"getglobal {index} {instance}" );
+        public void LuaC_setfield(int index, string property) => SendLuaCScript($"setfield {index} {property}");
+        public void LuaC_pushvalue(int index) => SendLuaCScript($"pushvalue {index}");
+        public void LuaC_pushstring(string text) => SendLuaCScript($"pushstring {text}");
+        public void LuaC_pushnumber(int number) => SendLuaCScript($"pushnumber {number}");
+        public void LuaC_settop(int index) => SendLuaCScript($"settop {index}");
+        public void LuaC_pushboolean(string value = "false") => SendLuaCScript($"pushboolean {value}");
         public void LuaC_gettop() => SendLuaCScript("gettop");
         public void LuaC_pushnil() => SendLuaCScript("pushnil");
         public void LuaC_next(int index) => SendLuaCScript("next");
-        public void LuaC_pop(int quantity) => SendLuaCScript("pop " + quantity.ToString());
-        public void ConsolePrint(string text = "") => SendLuaScript("rconsoleprint " + text);
-        public void ConsoleWarn(string text = "") => SendLuaScript("rconsolewarn " + text);
-        public void ConsoleError(string text = "") => SendLuaScript("rconsoleerr " + text);
+        public void LuaC_pop(int quantity) => SendLuaCScript($"pop {quantity}";
+        public void ConsolePrint(string text = "") => SendLuaScript($"rconsoleprint {text}");
+        public void ConsoleWarn(string text = "") => SendLuaScript($"rconsolewarn {text}");
+        public void ConsoleError(string text = "") => SendLuaScript($"rconsoleerr {text}");
         public void DoBTools(string username = "me") => SendLuaScript("loadstring(game:HttpGet(\"https://cdn.wearedevs.net/scripts/BTools.txt\"))()");
         public void Suicide(string username = "me") => SendLuaScript("game:GetService(\"Players\").LocalPlayer.Character:BreakJoints()");
         public void AddForcefield(string username = "me") => SendLuaScript("Instance.new(\"ForceField\", game:GetService(\"Players\").LocalPlayer.Character)");
@@ -47,11 +47,11 @@ namespace SpacewareRBX
         public void AddSmoke(string username = "me") => SendLuaScript("Instance.new(\"Smoke\", game:GetService(\"Players\").LocalPlayer.Character.HumanoidRootPart)");
         public void RemoveSmoke(string username = "me") => SendLuaScript("game:GetService(\"Players\").LocalPlayer.Character.HumanoidRootPart.Smoke:Destroy()");
         public void DoBlockHead(string username = "me") => SendLuaScript("game:GetService(\"Players\").LocalPlayer.Character.Head.Mesh:Destroy()");
-        public void SetWalkSpeed(string username = "me", int value = 100) => SendLuaScript("game:GetService(\"Players\").LocalPlayer.Character.Humanoid.WalkSpeed = " + value.ToString());
+        public void SetWalkSpeed(string username = "me", int value = 100) => SendLuaScript($"game:GetService(\"Players\").LocalPlayer.Character.Humanoid.WalkSpeed = {value}");
         public void ToggleClickTeleport() => SendLuaScript("loadstring(game:HttpGet(\"https://cdn.wearedevs.net/scripts/Click Teleport.txt\"))()");
-        public void SetFogStart(int value = 0) => SendLuaScript("game:GetService(\"Lighting\").FogStart = " + value.ToString());
-        public void SetFogEnd(int value = 0) => SendLuaScript("game:GetService(\"Lighting\").FogEnd = " + value.ToString());
-        public void SetJumpPower(int value = 100) => SendLuaScript("game:GetService(\"Players\").LocalPlayer.Character.Humanoid.JumpPower = " + value.ToString());
+        public void SetFogStart(int value = 0) => SendLuaScript($"game:GetService(\"Lighting\").FogStart = {value}");
+        public void SetFogEnd(int value = 0) => SendLuaScript($"game:GetService(\"Lighting\").FogEnd = {value}");
+        public void SetJumpPower(int value = 100) => SendLuaScript($"game:GetService(\"Players\").LocalPlayer.Character.Humanoid.JumpPower = {value}");
         public void TeleportToPlayer(string targetUsername = "me") => SendLuaScript("game:GetService(\"Players\").LocalPlayer.Character:MoveTo(game:GetService(\"Players\"):FindFirstChild(" + targetUsername + ").Character.HumanoidRootPart.Position)");
         public void LuaC_pcall(int numberOfArguments, int numberOfResults, int ErrorFunction) => SendLuaCScript($"pushnumber {numberOfArguments} {numberOfResults} {ErrorFunction}");
         public void RemoveLimbs(string username = "me")
